@@ -42,4 +42,5 @@
 
     <!-- List -->
     <string name="search">Pesquisar Descrição</string>
+    <string name="deleteAccount">Excluir conta</string>
 </resources>

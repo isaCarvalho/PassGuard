@@ -26,6 +26,11 @@ class Session private constructor(private var user: User?, private var authentic
             if (instance != null)
                 instance = Session(null, false)
         }
+
+        fun update(user: User)
+        {
+            instance!!.user = user
+        }
     }
 
     fun getUser() = this.user

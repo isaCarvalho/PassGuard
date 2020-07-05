@@ -1,11 +1,14 @@
 package com.example.passguard
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.passguard.adapter.ListRegisterAdapter
 import com.example.passguard.controller.RegisterController
+import com.example.passguard.controller.UserController
 import com.example.passguard.fragment.AddRegisterDialogFragment
 import com.example.passguard.model.User
 import com.example.passguard.session.Session
@@ -128,9 +132,56 @@ class ListActivity : AppCompatActivity(), AddRegisterDialogFragment.AddRegisterD
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 
+    fun settings(v: MenuItem)
+    {
+        val mView = layoutInflater.inflate(R.layout.fragment_settings, null)
+
+        val name = mView.findViewById<EditText>(R.id.nameEditText)
+        val email = mView.findViewById<EditText>(R.id.emailEditText)
+        val password = mView.findViewById<EditText>(R.id.passwordEditText)
+
+        name.setText(user!!.name)
+        email.setText(user!!.email)
+        password.setText(user!!.password)
+
+        AlertDialog.Builder(this)
+            .setView(mView)
+            .setTitle(R.string.edit)
+            .setIcon(R.mipmap.ic_launcher)
+            .setPositiveButton(R.string.save, DialogInterface.OnClickListener { dialog, which ->
+                user!!.name = name.text.toString()
+                user!!.email = email.text.toString()
+                user!!.password = password.text.toString()
+
+                if (UserController(this).edit(user!!))
+                {
+                    Session.update(user!!)
+                    Toast.makeText(this, "Dados editados com sucesso", Toast.LENGTH_SHORT).show()
+                }
+                else
+                    Toast.makeText(this, "Não foi possível editar os dados", Toast.LENGTH_SHORT).show()
+            })
+            .setNegativeButton(R.string.cancel, DialogInterface.OnClickListener { dialog, which ->
+                dialog.dismiss()
+            })
+            .show()
+    }
+
     fun logout(v: MenuItem)
     {
         Session.destroy()
         finish()
+    }
+
+    fun deleteAccount(v : MenuItem)
+    {
+        if (UserController(this).delete(user!!.id))
+        {
+            Session.destroy()
+            finish()
+            Toast.makeText(this, "Conta excluída com sucesso", Toast.LENGTH_SHORT).show()
+        }
+        else
+            Toast.makeText(this, "Não foi possível excluir a conta", Toast.LENGTH_SHORT).show()
     }
 }

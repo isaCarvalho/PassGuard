@@ -61,12 +61,17 @@ class DatabaseController(private val context: Context)
     {
         val db = dbHelper.writableDatabase
 
-        db?.execSQL("UPDATE ${DatabaseCreator.FeedReaderContract.FeedEntry.TABLE_USERS} " +
-                "SET ${DatabaseCreator.FeedReaderContract.FeedEntry.USER_NAME} = '?', " +
-                "${DatabaseCreator.FeedReaderContract.FeedEntry.USER_EMAIL} = '?', " +
-                "${DatabaseCreator.FeedReaderContract.FeedEntry.USER_PASSWORD} = '?' " +
-                "WHERE ${BaseColumns._ID} = ?",
-            arrayOf(user.name, user.email, user.password, user.id.toString())
+        val contentValues = ContentValues().apply {
+            put(DatabaseCreator.FeedReaderContract.FeedEntry.USER_NAME, user.name)
+            put(DatabaseCreator.FeedReaderContract.FeedEntry.USER_EMAIL, user.email)
+            put(DatabaseCreator.FeedReaderContract.FeedEntry.USER_PASSWORD, user.password)
+        }
+
+        db?.update(
+            DatabaseCreator.FeedReaderContract.FeedEntry.TABLE_USERS,
+            contentValues,
+            "${BaseColumns._ID} = ?",
+            arrayOf(user.id.toString())
         )
     }
 
@@ -74,12 +79,17 @@ class DatabaseController(private val context: Context)
     {
         val db = dbHelper.writableDatabase
 
-        db?.execSQL("UPDATE ${DatabaseCreator.FeedReaderContract.FeedEntry.TABLE_REGISTERS} " +
-                "SET ${DatabaseCreator.FeedReaderContract.FeedEntry.PASSWORD_DESCRIPTION} = '?', " +
-                "${DatabaseCreator.FeedReaderContract.FeedEntry.PASSWORD_CONTENT} = '?', " +
-                "${DatabaseCreator.FeedReaderContract.FeedEntry.ID_USER} = ? " +
-                "WHERE ${BaseColumns._ID} = ?",
-            arrayOf(register.passwordDescription, register.passwordContent, register.user_id, register.id.toString())
+        val contentValues = ContentValues().apply {
+            put(DatabaseCreator.FeedReaderContract.FeedEntry.PASSWORD_DESCRIPTION, register.passwordDescription)
+            put(DatabaseCreator.FeedReaderContract.FeedEntry.PASSWORD_CONTENT, register.passwordContent)
+            put(DatabaseCreator.FeedReaderContract.FeedEntry.ID_USER, register.user_id)
+        }
+
+        db?.update(
+            DatabaseCreator.FeedReaderContract.FeedEntry.TABLE_REGISTERS,
+            contentValues,
+            "${BaseColumns._ID} = ?",
+            arrayOf(register.id.toString())
         )
     }
 

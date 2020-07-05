@@ -1,12 +1,11 @@
 package com.example.passguard.adapter
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.passguard.R
 import com.example.passguard.controller.RegisterController
@@ -40,10 +39,43 @@ class ListRegisterAdapter(private var myDataset : ArrayList<Register>)
             val password = myDataset[position]
 
             RegisterController(v.context).delete(password.id)
+            notifyDataSetChanged()
         }
 
         holder.imgEdit.setOnClickListener { v ->
             val password = myDataset[position]
+
+            val mView = LayoutInflater.from(v.context).inflate(R.layout.fragment_add_register, null)
+
+            val passwordDescriptionTxt = mView.findViewById<EditText>(R.id.descriptionEditText)
+            val passwordContentTxt = mView.findViewById<EditText>(R.id.contentEditText)
+
+            passwordDescriptionTxt.setText(password.passwordDescription)
+            passwordContentTxt.setText(password.passwordContent)
+
+            AlertDialog.Builder(v.context)
+                .setView(mView)
+                .setTitle(R.string.edit)
+                .setIcon(R.mipmap.ic_launcher)
+                .setPositiveButton(R.string.save, DialogInterface.OnClickListener { dialog, which ->
+                    val passwordDescription = passwordDescriptionTxt.text.toString()
+                    val passwordContent = passwordContentTxt.text.toString()
+
+                    password.passwordDescription = passwordDescription
+                    password.passwordContent = passwordContent
+
+                    if (RegisterController(v.context).edit(password))
+                    {
+                        Toast.makeText(v.context, "Editado com sucesso", Toast.LENGTH_SHORT).show()
+                        notifyDataSetChanged()
+                    }
+                    else
+                        Toast.makeText(v.context, "Não foi possível editar", Toast.LENGTH_SHORT).show()
+                })
+                .setNegativeButton(R.string.cancel, DialogInterface.OnClickListener { dialog, which ->
+                    dialog.dismiss()
+                })
+                .show()
         }
     }
 

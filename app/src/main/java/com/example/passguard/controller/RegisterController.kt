@@ -39,4 +39,15 @@ class RegisterController(private val context: Context)
             false
         }
     }
+
+    fun edit(register: Register) : Boolean
+    {
+        return try {
+            DatabaseController(context).update(register)
+            true
+        } catch (e: Exception) {
+            print(e.message)
+            false
+        }
+    }
 }

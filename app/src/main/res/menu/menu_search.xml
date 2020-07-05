@@ -7,5 +7,10 @@
         android:icon="@mipmap/search"
         android:title="@string/search"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:onClick="deleteAccount"
+        android:title="@string/deleteAccount"
+        app:showAsAction="never" />
 </menu>
