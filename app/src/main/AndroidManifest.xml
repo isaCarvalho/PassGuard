@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ListActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppThemeActionBar"
+        />
         <activity
             android:name=".CreateAccountActivity"
             android:parentActivityName=".MainActivity"

@@ -5,7 +5,6 @@ import android.content.Context
 import android.provider.BaseColumns
 import com.example.passguard.model.Register
 import com.example.passguard.model.User
-import java.lang.Exception
 
 class DatabaseController(private val context: Context)
 {

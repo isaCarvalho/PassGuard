@@ -39,4 +39,7 @@
     <string name="addContent">Senha</string>
     <string name="save">Salvar</string>
     <string name="cancel">Cancelar</string>
+
+    <!-- List -->
+    <string name="search">Pesquisar Descrição</string>
 </resources>
