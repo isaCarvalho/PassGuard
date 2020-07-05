@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loginBtn : Button
     private lateinit var emailTxt : EditText
     private lateinit var passwordTxt : EditText
+    private lateinit var error : TextView
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         emailTxt = findViewById<EditText>(R.id.emailEdit)
         passwordTxt = findViewById<EditText>(R.id.passwordEdit)
 
-        val error = findViewById<TextView>(R.id.errorTxt)
+        error = findViewById<TextView>(R.id.errorTxt)
 
         if (Session.getInstance().getAuthentication())
         {
@@ -80,6 +81,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        error.text = ""
         emailTxt.text = null
         passwordTxt.text = null
     }

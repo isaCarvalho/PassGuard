@@ -91,7 +91,7 @@ class ListActivity : AppCompatActivity(), AddRegisterDialogFragment.AddRegisterD
         AddRegisterDialogFragment().show(supportFragmentManager, "AddRegisterDialog")
     }
 
-    fun updateRecycler(user: User)
+    private fun updateRecycler(user: User)
     {
         val registers = RegisterController(this).list(user.id)
 
@@ -130,6 +130,20 @@ class ListActivity : AppCompatActivity(), AddRegisterDialogFragment.AddRegisterD
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+    }
+
+    fun help(v : MenuItem)
+    {
+        val mView = layoutInflater.inflate(R.layout.fragment_help, null)
+
+        AlertDialog.Builder(this)
+            .setView(mView)
+            .setTitle(R.string.edit)
+            .setIcon(R.mipmap.ic_launcher)
+            .setPositiveButton(R.string.close, DialogInterface.OnClickListener { dialog, which ->
+                dialog.dismiss()
+            })
+            .show()
     }
 
     fun settings(v: MenuItem)

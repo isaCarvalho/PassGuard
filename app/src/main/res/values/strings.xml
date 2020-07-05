@@ -43,4 +43,15 @@
     <!-- List -->
     <string name="search">Pesquisar Descrição</string>
     <string name="deleteAccount">Excluir conta</string>
+
+    <!-- Help -->
+    <string name="helpText">
+        Clique no botão adicionar na parte inferior da tela.
+        Digite a descrição da conta a quem pertence a senha (Ex: Email, Stream de mídia, Conta do Banco, etc.).
+        Digite qual a senha.
+        Clique em salvar.
+        Caso queira alterar seus dados, clique no botão de configurações.
+        Caso queira excluir a sua conta, clique no menu > Excluir conta.
+    </string>
+    <string name="close">Fechar</string>
 </resources>
