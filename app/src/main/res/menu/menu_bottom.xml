@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/addPasswordItem"
+        android:icon="@mipmap/passcode"
+        android:title="@string/addPassword" />
+    <item
+        android:id="@+id/settingsItem"
+        android:icon="@mipmap/settings"
+        android:title="@string/settings" />
+    <item
+        android:id="@+id/helpItem"
+        android:icon="@mipmap/info"
+        android:title="@string/help" />
+    <item
+        android:id="@+id/logoutItem"
+        android:icon="@mipmap/logout"
+        android:onClick="logout"
+        android:title="@string/logout" />
+</menu>
