@@ -16,11 +16,18 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var createAccountBtn : Button
     private lateinit var loginBtn : Button
+    private lateinit var emailTxt : EditText
+    private lateinit var passwordTxt : EditText
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        emailTxt = findViewById<EditText>(R.id.emailEdit)
+        passwordTxt = findViewById<EditText>(R.id.passwordEdit)
+
+        val error = findViewById<TextView>(R.id.errorTxt)
 
         if (Session.getInstance().getAuthentication())
         {
@@ -38,10 +45,7 @@ class MainActivity : AppCompatActivity() {
             loginBtn = findViewById(R.id.loginBtn)
             loginBtn.setOnClickListener {
 
-                val error = findViewById<TextView>(R.id.errorTxt)
-
-                val email = findViewById<EditText>(R.id.emailEdit).text.toString()
-
+                val email = emailTxt.text.toString()
                 var message = Validate.isEmailValid(email)
 
                 if (!message.isNullOrEmpty()) {
@@ -49,8 +53,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                val password = findViewById<EditText>(R.id.passwordEdit).text.toString()
-
+                val password = passwordTxt.text.toString()
                 message = Validate.isPasswordValid(password)
 
                 if (!message.isNullOrEmpty()) {
@@ -72,5 +75,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        emailTxt.text = null
+        passwordTxt.text = null
     }
 }

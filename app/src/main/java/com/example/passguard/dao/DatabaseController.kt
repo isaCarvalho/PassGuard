@@ -28,13 +28,14 @@ class DatabaseController(private val context: Context)
         )
     }
 
-    fun insert(passwordDescription: String, passwordContent : String)
+    fun insert(passwordDescription: String, passwordContent : String, id_user : Int)
     {
         val db = dbHelper.writableDatabase
 
         val contentValues = ContentValues().apply {
             put(DatabaseCreator.FeedReaderContract.FeedEntry.PASSWORD_DESCRIPTION, passwordDescription)
             put(DatabaseCreator.FeedReaderContract.FeedEntry.PASSWORD_CONTENT, passwordContent)
+            put(DatabaseCreator.FeedReaderContract.FeedEntry.ID_USER, id_user)
         }
 
         db?.insert(

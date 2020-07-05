@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PassGuard</string>
 
-<!--    EditText    -->
+    <!--    EditText    -->
 
     <string name="username">Nome de usuário</string>
     <string name="email">Email</string>
@@ -9,26 +9,34 @@
     <string name="confirmPassword">Confirmar Senha</string>
     <string name="confirmEmail">Confirmar Email</string>
 
-<!--    Botões     -->
+    <!--    Botões     -->
 
     <string name="login">Entrar</string>
     <string name="createAccount">Criar Conta</string>
 
-<!--    Menu      -->
+    <!--    Menu      -->
 
     <string name="addPassword">Adicionar</string>
     <string name="settings">Configurações</string>
     <string name="logout">Sair</string>
     <string name="help">Ajuda</string>
 
-<!--    Card     -->
+    <!--    Card     -->
 
     <string name="delete">Apagar</string>
     <string name="edit">Editar</string>
 
-<!--    Error    -->
+    <!--    Error    -->
 
     <string name="confirmPasswordError">As senhas devem ser iguais</string>
     <string name="confirmEmailError">Os emails devem ser iguais</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    <!-- Add Register -->
+
+    <string name="addDescription">Descrição</string>
+    <string name="addContent">Senha</string>
+    <string name="save">Salvar</string>
+    <string name="cancel">Cancelar</string>
 </resources>

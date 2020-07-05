@@ -4,6 +4,7 @@
     <item
         android:id="@+id/addPasswordItem"
         android:icon="@mipmap/passcode"
+        android:onClick="showAddRegisterDialog"
         android:title="@string/addPassword" />
     <item
         android:id="@+id/settingsItem"
