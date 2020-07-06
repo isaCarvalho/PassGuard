@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        error.text = ""
+        error.text = null
         emailTxt.text = null
         passwordTxt.text = null
     }

@@ -106,39 +106,13 @@ class ListActivity : AppCompatActivity(), AddRegisterDialogFragment.AddRegisterD
         }
     }
 
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-
-        if (hasFocus)
-            hideSystemUI()
-        else
-            showSystemUI()
-    }
-
-    private fun hideSystemUI()
-    {
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
-                View.SYSTEM_UI_FLAG_FULLSCREEN
-    }
-
-    private fun showSystemUI()
-    {
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
-    }
-
     fun help(v : MenuItem)
     {
         val mView = layoutInflater.inflate(R.layout.fragment_help, null)
 
         AlertDialog.Builder(this)
             .setView(mView)
-            .setTitle(R.string.edit)
+            .setTitle(R.string.help)
             .setIcon(R.mipmap.ic_launcher)
             .setPositiveButton(R.string.close, DialogInterface.OnClickListener { dialog, which ->
                 dialog.dismiss()
