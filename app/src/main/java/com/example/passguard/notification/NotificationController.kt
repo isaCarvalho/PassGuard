@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import com.example.passguard.MainActivity
@@ -45,7 +46,8 @@ class NotificationController private constructor(private val context: Context)
 
         builder.setContentTitle("Código de autenticação")
             .setContentText(code)
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher_background))
+            .setSmallIcon(R.mipmap.ic_launcher_background)
             .setContentIntent(pendingIntent)
 
         notificationManager.notify(0, builder.build())
@@ -61,6 +63,11 @@ class NotificationController private constructor(private val context: Context)
         }
 
         fun getCode() = code
+
+        fun clearCode()
+        {
+            code = ""
+        }
 
         fun getInstance(context: Context) : NotificationController
         {

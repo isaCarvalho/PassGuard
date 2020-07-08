@@ -58,7 +58,10 @@ class AuthenticationActivity : AppCompatActivity() {
         super.onResume()
         errorTxt.text = null
         authenticationEdit.text = null
+    }
 
+    override fun onStop() {
+        super.onStop()
         finish()
     }
 }

@@ -2,6 +2,7 @@ package com.example.passguard.controller
 
 import android.content.Context
 import com.example.passguard.dao.UserDao
+import com.example.passguard.notification.NotificationController
 import com.example.passguard.session.Session
 
 class LoginController(context: Context)
@@ -14,5 +15,14 @@ class LoginController(context: Context)
 
         if (user != null)
             Session.saveInstance(user)
+    }
+
+    companion object
+    {
+        fun logout()
+        {
+            Session.destroy()
+            NotificationController.clearCode()
+        }
     }
 }

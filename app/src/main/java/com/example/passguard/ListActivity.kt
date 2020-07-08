@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.passguard.adapter.ListRegisterAdapter
+import com.example.passguard.controller.LoginController
 import com.example.passguard.controller.RegisterController
 import com.example.passguard.controller.UserController
 import com.example.passguard.fragment.AddRegisterDialogFragment
@@ -157,7 +158,7 @@ class ListActivity : AppCompatActivity(), AddRegisterDialogFragment.AddRegisterD
 
     fun logout(v: MenuItem)
     {
-        Session.destroy()
+        LoginController.logout()
         finish()
     }
 
