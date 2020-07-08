@@ -58,5 +58,7 @@ class AuthenticationActivity : AppCompatActivity() {
         super.onResume()
         errorTxt.text = null
         authenticationEdit.text = null
+
+        finish()
     }
 }

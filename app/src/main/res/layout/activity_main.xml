@@ -78,10 +78,10 @@
             android:id="@+id/loginCodeBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/buttonPrimary"
+            android:layout_marginBottom="4dp"
+            android:background="#00FFFFFF"
             android:text="@string/loginCode"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="4dp"/>
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/createAccountBtn"
