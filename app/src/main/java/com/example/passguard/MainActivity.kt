@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.passguard.controller.LoginController
+import com.example.passguard.notification.NotificationController
 import com.example.passguard.session.Session
 import com.example.passguard.util.Validate
 
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val notificationController = NotificationController.getInstance(this)
+        notificationController.pushNotification()
 
         emailTxt = findViewById<EditText>(R.id.emailEdit)
         passwordTxt = findViewById<EditText>(R.id.passwordEdit)
