@@ -1,6 +1,5 @@
 package com.example.passguard
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -15,7 +14,6 @@ class CreateAccountActivity : AppCompatActivity() {
 
     private lateinit var createAccountBtn : Button
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
@@ -29,42 +27,48 @@ class CreateAccountActivity : AppCompatActivity() {
             val email = findViewById<EditText>(R.id.createEmailEdit).text.toString()
             var message = Validate.isEmailValid(email)
 
-            if (!message.isNullOrEmpty())
+            if (message != 0)
             {
-                errorTxt.text = message
+                when (message) {
+                    1 -> errorTxt.setText(R.string.emptyEmail)
+                    2 -> errorTxt.setText(R.string.invalidEmail)
+                }
                 return@setOnClickListener
             }
 
             val confirmEmail = findViewById<EditText>(R.id.confirmEmailEdit).text.toString()
             if (email != confirmEmail)
             {
-                errorTxt.setText(R.string.confirmEmailError)
+                errorTxt.setText(R.string.notEqualEmail)
                 return@setOnClickListener
             }
 
             val password = findViewById<EditText>(R.id.createPasswordEdit).text.toString()
             message = Validate.isPasswordValid(password)
 
-            if (!message.isNullOrEmpty())
+            if (message != 0)
             {
-                errorTxt.text = message
+                when (message) {
+                    1 -> errorTxt.setText(R.string.emptyPassword)
+                    2 -> errorTxt.setText(R.string.invalidPassword)
+                }
                 return@setOnClickListener
             }
 
             val confirmPassword = findViewById<EditText>(R.id.confirmPasswordEdit).text.toString()
             if (password != confirmPassword)
             {
-                errorTxt.setText(R.string.confirmPasswordError)
+                errorTxt.setText(R.string.notEqualPasswords)
                 return@setOnClickListener
             }
 
             if (UserController(this).insert(name, email, password)) {
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Usuario criado com sucesso", Toast.LENGTH_SHORT).show()
                 finish()
             }
             else
             {
-                errorTxt.text = "Não foi possível criar a conta"
+                errorTxt.setText(R.string.errorCreatingAccount)
             }
         }
     }

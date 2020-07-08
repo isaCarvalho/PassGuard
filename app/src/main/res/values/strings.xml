@@ -6,12 +6,15 @@
     <string name="username">Nome de usuário</string>
     <string name="email">Email</string>
     <string name="password">Senha</string>
+    <string name="code">Código</string>
     <string name="confirmPassword">Confirmar Senha</string>
     <string name="confirmEmail">Confirmar Email</string>
 
     <!--    Botões     -->
 
-    <string name="login">Entrar</string>
+    <string name="login">Entra</string>
+    <string name="loginPassword">Entrar com senha</string>
+    <string name="loginCode">Entrar com codigo</string>
     <string name="createAccount">Criar Conta</string>
 
     <!--    Menu      -->
@@ -54,4 +57,20 @@
         Caso queira excluir a sua conta, clique no menu > Excluir conta.
     </string>
     <string name="close">Fechar</string>
+
+    <!-- Authentication -->
+    <string name="authentication">Código ou senha</string>
+
+    <!-- Messages -->
+    <string name="incorrectPassword">Senha incorreta</string>
+    <string name="incorrectCode">Código incorreto</string>
+    <string name="incorrectEmail">Email incorreto</string>
+    <string name="invalidEmail">Email inválido</string>
+    <string name="invalidPassword">Senha inválida</string>
+    <string name="emptyEmail">Email é obrigatório</string>
+    <string name="emptyPassword">Senha é obrigatória</string>
+    <string name="userAuthenticated">Usuário autenticado</string>
+    <string name="errorCreatingAccount">Não foi possível criar sua conta</string>
+    <string name="notEqualEmail">Os emails devem ser iguais</string>
+    <string name="notEqualPasswords">As senhas devem ser iguais</string>
 </resources>

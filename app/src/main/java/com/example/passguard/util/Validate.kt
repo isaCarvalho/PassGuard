@@ -7,28 +7,28 @@ class Validate
 {
     companion object
     {
-        fun isEmailValid(email : String?) : String?
+        fun isEmailValid(email : String?) : Int
         {
             Log.d("EMAIL", "email: $email")
 
             if (email.isNullOrEmpty())
-                return "Email é obrigatório"
+                return 1
 
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-                return "Email inválido"
+                return 2
 
-            return null
+            return 0
         }
 
-        fun isPasswordValid(password : String?) : String?
+        fun isPasswordValid(password : String?) : Int
         {
             if (password.isNullOrEmpty())
-                return "Senha é obrigatório"
+                return 1
 
             if (password.length < 8)
-                return "Senha inválida"
+                return 2
 
-            return null
+            return 0
         }
     }
 }

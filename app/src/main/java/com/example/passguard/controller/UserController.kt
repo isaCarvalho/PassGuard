@@ -1,16 +1,18 @@
 package com.example.passguard.controller
 
 import android.content.Context
-import com.example.passguard.dao.DatabaseController
+import com.example.passguard.dao.UserDao
 import com.example.passguard.model.User
 import java.lang.Exception
 
 class UserController(private val context: Context)
 {
+    private val userDao = UserDao(context)
+
     fun insert(name: String, email : String, password : String) : Boolean
     {
         return try {
-            DatabaseController(context).insert(name, email, password)
+            userDao.insert(name, email, password)
 
             true
         } catch (e : Exception) {
@@ -23,7 +25,7 @@ class UserController(private val context: Context)
     fun delete(id : Int) : Boolean
     {
         return try {
-            DatabaseController(context).delete(id, true)
+            userDao.delete(id)
             true
         } catch (e: Exception) {
             print(e.message)
@@ -34,7 +36,7 @@ class UserController(private val context: Context)
     fun edit(user: User) : Boolean
     {
         return try {
-            DatabaseController(context).update(user)
+            userDao.update(user)
             true
         } catch (e: Exception) {
             print(e.message)

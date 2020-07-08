@@ -8,25 +8,17 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.passguard.MainActivity
 import com.example.passguard.R
 
 class NotificationController private constructor(private val context: Context)
 {
-    private lateinit var code : String
     private lateinit var notificationManager : NotificationManager
     private lateinit var notificationChannel: NotificationChannel
     private lateinit var builder : Notification.Builder
 
     private val channelId = "com.example.passguard"
     private val description = "code notification"
-
-    private fun codeGenerator() {
-        code = (100000..999999).random().toString()
-    }
-
-    fun getCode() = code
 
     fun pushNotification()
     {
@@ -62,6 +54,13 @@ class NotificationController private constructor(private val context: Context)
     companion object
     {
         private var notificationController: NotificationController? = null
+        private lateinit var code : String
+
+        private fun codeGenerator() {
+            code = (100000..999999).random().toString()
+        }
+
+        fun getCode() = code
 
         fun getInstance(context: Context) : NotificationController
         {

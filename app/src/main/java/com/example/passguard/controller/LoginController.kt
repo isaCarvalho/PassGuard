@@ -1,16 +1,16 @@
 package com.example.passguard.controller
 
 import android.content.Context
-import com.example.passguard.dao.DatabaseController
+import com.example.passguard.dao.UserDao
 import com.example.passguard.session.Session
 
 class LoginController(context: Context)
 {
-    private var databaseController : DatabaseController  = DatabaseController(context)
+    private var userDao : UserDao  = UserDao(context)
 
-    fun authenticate(email : String, password : String)
+    fun authenticateEmail(email : String)
     {
-        val user = databaseController.getUser(email, password)
+        val user = userDao.getUserByEmail(email)
 
         if (user != null)
             Session.saveInstance(user)

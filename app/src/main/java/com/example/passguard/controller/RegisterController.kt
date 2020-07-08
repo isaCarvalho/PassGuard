@@ -1,16 +1,18 @@
 package com.example.passguard.controller
 
 import android.content.Context
-import com.example.passguard.dao.DatabaseController
+import com.example.passguard.dao.RegisterDao
 import com.example.passguard.model.Register
 import java.lang.Exception
 
 class RegisterController(private val context: Context)
 {
+    private val registerDao = RegisterDao(context)
+
     fun insert(passwordDescription : String, passwordContent: String, id_user : Int) : Boolean
     {
         return try {
-            DatabaseController(context).insert(passwordDescription, passwordContent, id_user)
+            registerDao.insert(passwordDescription, passwordContent, id_user)
             true
         } catch (e: Exception) {
             print(e.message)
@@ -22,7 +24,7 @@ class RegisterController(private val context: Context)
     {
         val registers = ArrayList<Register>()
 
-        DatabaseController(context).listRegisters(idUser).forEach { item ->
+        registerDao.listRegisters(idUser).forEach { item ->
             registers.add(item)
         }
 
@@ -32,7 +34,7 @@ class RegisterController(private val context: Context)
     fun delete(id : Int) : Boolean
     {
         return try {
-            DatabaseController(context).delete(id, false)
+            registerDao.delete(id)
             true
         } catch (e: Exception) {
             print(e.message)
@@ -43,7 +45,7 @@ class RegisterController(private val context: Context)
     fun edit(register: Register) : Boolean
     {
         return try {
-            DatabaseController(context).update(register)
+            registerDao.update(register)
             true
         } catch (e: Exception) {
             print(e.message)

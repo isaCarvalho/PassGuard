@@ -7,18 +7,18 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import com.example.passguard.controller.LoginController
 import com.example.passguard.notification.NotificationController
 import com.example.passguard.session.Session
+import com.example.passguard.util.IS_PASSWORD
 import com.example.passguard.util.Validate
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var createAccountBtn : Button
-    private lateinit var loginBtn : Button
+    private lateinit var loginPasswordBtn : Button
+    private lateinit var loginCodeBtn : Button
     private lateinit var emailTxt : EditText
-    private lateinit var passwordTxt : EditText
     private lateinit var error : TextView
 
     @SuppressLint("SetTextI18n")
@@ -26,13 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val notificationController = NotificationController.getInstance(this)
-        notificationController.pushNotification()
-
-        emailTxt = findViewById<EditText>(R.id.emailEdit)
-        passwordTxt = findViewById<EditText>(R.id.passwordEdit)
-
-        error = findViewById<TextView>(R.id.errorTxt)
+        emailTxt = findViewById(R.id.emailEdit)
+        error = findViewById(R.id.errorTxt)
 
         if (Session.getInstance().getAuthentication())
         {
@@ -47,36 +42,35 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-            loginBtn = findViewById(R.id.loginBtn)
-            loginBtn.setOnClickListener {
-
-                val email = emailTxt.text.toString()
-                var message = Validate.isEmailValid(email)
-
-                if (!message.isNullOrEmpty()) {
-                    error.text = message
-                    return@setOnClickListener
-                }
-
-                val password = passwordTxt.text.toString()
-                message = Validate.isPasswordValid(password)
-
-                if (!message.isNullOrEmpty()) {
-                    error.text = message
-                    return@setOnClickListener
-                }
-
-                error.text = ""
-
-                LoginController(this).authenticate(email, password)
+            loginPasswordBtn = findViewById(R.id.loginPasswordBtn)
+            loginPasswordBtn.setOnClickListener {
+                authenticateEmail()
 
                 if (Session.getInstance().getAuthentication()) {
-                    Toast.makeText(this, "Usuário autenticado", Toast.LENGTH_SHORT).show()
-
-                    val intent = Intent(this, ListActivity::class.java)
+                    val intent = Intent(this, AuthenticationActivity::class.java).apply {
+                        putExtra(IS_PASSWORD, true)
+                    }
                     startActivity(intent)
                 } else {
-                    error.text = "Nome de usuário ou senha incorretos"
+                    error.setText(R.string.incorrectEmail)
+                }
+            }
+
+            loginCodeBtn = findViewById(R.id.loginCodeBtn)
+            loginCodeBtn.setOnClickListener {
+
+                authenticateEmail()
+
+                if (Session.getInstance().getAuthentication()) {
+                    val notificationController = NotificationController.getInstance(this)
+                    notificationController.pushNotification()
+
+                    val intent = Intent(this, AuthenticationActivity::class.java).apply {
+                        putExtra(IS_PASSWORD, false)
+                    }
+                    startActivity(intent)
+                } else {
+                    error.setText(R.string.incorrectEmail)
                 }
             }
         }
@@ -87,6 +81,24 @@ class MainActivity : AppCompatActivity() {
 
         error.text = null
         emailTxt.text = null
-        passwordTxt.text = null
+    }
+
+    private fun authenticateEmail()
+    {
+        val email = emailTxt.text.toString()
+        val message = Validate.isEmailValid(email)
+
+        if (message != 0) {
+            when (message) {
+                1 -> error.setText(R.string.emptyEmail)
+                2 -> error.setText(R.string.invalidEmail)
+            }
+
+            return
+        }
+
+        error.text = null
+
+        LoginController(this).authenticateEmail(email)
     }
 }
